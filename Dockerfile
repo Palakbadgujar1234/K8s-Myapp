@@ -1,0 +1,23 @@
+# Dockerfile for Kubernetes deployment
+# This builds a Docker image for app1.py
+
+# Use official Python runtime as base image
+FROM python:3.11-slim
+
+# Set working directory in container
+WORKDIR /app
+
+# Copy requirements file
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code (app1.py instead of app.py)
+COPY app1.py .
+
+# Expose port 3000
+EXPOSE 3000
+
+# Run the application
+CMD ["python", "app1.py"]
