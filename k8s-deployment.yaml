@@ -1,0 +1,63 @@
+# Kubernetes Deployment Configuration
+# This file tells Kubernetes how to run your Flask app
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app-deployment
+  labels:
+    app: flask-app
+spec:
+  # Number of replicas (copies) of your app
+  # Start with 2 for high availability
+  replicas: 2
+  
+  # Selector to identify which pods belong to this deployment
+  selector:
+    matchLabels:
+      app: flask-app
+  
+  # Template for creating pods
+  template:
+    metadata:
+      labels:
+        app: flask-app
+    spec:
+      containers:
+      - name: flask-app
+        # Docker image to use (you'll build this)
+        image: flask-app:latest
+        
+        # Pull policy - use IfNotPresent for local images
+        imagePullPolicy: IfNotPresent
+        
+        # Port the container exposes
+        ports:
+        - containerPort: 3000
+          name: http
+        
+        # Resource limits (prevents one pod from using all resources)
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        
+        # Health checks
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
+# Made with Bob
