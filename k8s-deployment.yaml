@@ -4,9 +4,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-app-deployment
+  name: k8s-myapp-deployment
   labels:
-    app: flask-app
+    app: k8s-myapp
 spec:
   # Number of replicas (copies) of your app
   # Start with 2 for high availability
@@ -15,18 +15,18 @@ spec:
   # Selector to identify which pods belong to this deployment
   selector:
     matchLabels:
-      app: flask-app
+      app: k8s-myapp
   
   # Template for creating pods
   template:
     metadata:
       labels:
-        app: flask-app
+        app: k8s-myapp
     spec:
       containers:
-      - name: flask-app
+      - name: k8s-myapp
         # Docker image to use (you'll build this)
-        image: flask-app:latest
+        image: k8s-myapp:latest
         
         # Pull policy - use IfNotPresent for local images
         imagePullPolicy: IfNotPresent
@@ -60,4 +60,4 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 5
 
-# Made with Bob
+
