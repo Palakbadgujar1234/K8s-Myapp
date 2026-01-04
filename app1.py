@@ -130,7 +130,7 @@ HTML_TEMPLATE = """
         <!-- Wave emoji with animation -->
         <h1>
             <span class="wave-emoji">👋</span>
-            Welcome to My App!
+            Welcome to My k8s App!
             <span class="wave-emoji">👋</span>
         </h1>
         
@@ -160,7 +160,7 @@ HTML_TEMPLATE = """
 @app.route('/')
 def home():
     # You can change this name to whatever you want
-    name = "Bob"
+    name = "Palak Badgujar"
     return render_template_string(HTML_TEMPLATE, name=name)
 
 if __name__ == '__main__':
