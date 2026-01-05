@@ -1,0 +1,43 @@
+# Kubernetes binaries - too large for GitHub
+kubectl
+minikube
+minikube-linux-amd64
+
+# Docker images and build artifacts
+*.tar
+*.tar.gz
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+/tmp/
+nohup.out
+
+# Kubernetes local config
+.kube/
+kubeconfig
+
+# Minikube
+.minikube/

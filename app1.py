@@ -160,7 +160,11 @@ HTML_TEMPLATE = """
 @app.route('/')
 def home():
     # You can change this name to whatever you want
+<<<<<<< HEAD
     name = "Palak Badgujar"
+=======
+    name = "palak Badgujar"
+>>>>>>> c247057e18421aa6291a5c0af9502ac6d8b7b9cc
     return render_template_string(HTML_TEMPLATE, name=name)
 
 if __name__ == '__main__':
