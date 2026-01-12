@@ -1,0 +1,63 @@
+# Kubernetes Deployment Configuration
+# This file tells Kubernetes how to run your Flask app
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  # Number of replicas (copies) of your app
+  # Start with 2 for high availability
+  replicas: {{ .Values.replicaCount}}
+  
+  # Selector to identify which pods belong to this deployment
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  
+  # Template for creating pods
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: {{ .Values.image.repository }}
+        # Docker image to use (you'll build this)
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        
+        # Pull policy - use IfNotPresent for local images
+        imagePullPolicy: IfNotPresent
+        
+        # Port the container exposes
+        ports:
+        - containerPort: 3000
+          name: http
+        
+        # Resource limits (prevents one pod from using all resources)
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        
+        # Health checks
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
+

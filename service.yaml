@@ -1,0 +1,27 @@
+# Kubernetes Service Configuration
+# This exposes your app to the outside world
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-service
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  # Type of service
+  # NodePort exposes the service on each Node's IP at a static port
+  type: {{ .Values.service.type }}
+  
+  # Selector to find the pods
+  selector:
+    app: {{ .Release.Name }}
+  
+  # Ports configuration
+  ports:
+  - port: {{ .Values.service.port }}          # Port the service listens on
+    targetPort: {{ .Values.service.port }}    # Port the container listens on
+    nodePort: {{ .Values.service.nodePort }}     # Port exposed on the node (30000-32767 range)
+    protocol: TCP
+    name: http
+
+# Made with Bob

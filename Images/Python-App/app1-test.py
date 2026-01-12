@@ -130,7 +130,7 @@ HTML_TEMPLATE = """
         <!-- Wave emoji with animation -->
         <h1>
             <span class="wave-emoji">👋</span>
-            Welcome to My k8s helm App!
+            Welcome to My k8s test helm App!
             <span class="wave-emoji">👋</span>
         </h1>
         
